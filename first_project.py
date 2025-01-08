@@ -1,10 +1,21 @@
-class Phone:
-    line_type = 'проводной'
+class Employee:
+    vacation_days = 28
 
-rotary_phone = Phone()
-keypad_phone = Phone()
+    def __init__(self, first_name, second_name, gender):
+        self.first_name = first_name
+        self.second_name = second_name
+        self.gender = gender
+        self.remaining_vacation_days = Employee.vacation_days
 
-# Печать содержимого атрибута line_type через объект rotary_phone.
-print(rotary_phone.line_type)
-# Печать содержимого атрибута line_type через объект keypad_phone.
-print(keypad_phone.line_type)
+    def consume_vacation(self, diff_day):
+        self.remaining_vacation_days -= diff_day
+        Employee.vacation_days = self.remaining_vacation_days
+
+    def get_vacation_details(self):
+        return f'Остаток отпускных дней: {employee.vacation_days}.'
+
+
+employee = Employee(first_name='Роберт', second_name='Крузо', gender='м')
+
+employee.consume_vacation(7)
+print(employee.get_vacation_details())
