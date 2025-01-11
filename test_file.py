@@ -1,30 +1,34 @@
-class BacteriaProducer:
+class CipherMaster:
+    # Не изменяйте и не перемещайте эту переменную
+    alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 
-    def __init__(self, max_bacteria):
-        self.max_bacteria = max_bacteria
-        self.current_bacteria_count = 0
-    def create(self):
-        if self.current_bacteria_count < self.max_bacteria:
-            self.current_bacteria_count += 1
-            print(f'Добавлена одна бактерия. Бактерий в колонии: {
-                  self.current_bacteria_count}')
-        else:
-            print(f'Нет места под новую бактерию')
+    def cipher(self, original_text, shift):
+        result = []
+        low_original_text = str.lower(original_text)
+        words = low_original_text.split()
+        for letter in words:
+            sup_result = []
+            for cimbol_words in letter:
+                chip_simbol = self.alphabet.find(cimbol_words)
+                new_chip_simbol = int(chip_simbol + shift)
+                chip = self.alphabet[new_chip_simbol]
+                sup_result += chip 
+            result.append(sup_result)
+        return result
 
-    def delete(self):
-        if self.current_bacteria_count == 0:
-            print(f'В популяции нет бактерий, удалять нечего')
-        else:
-            self.current_bacteria_count -= 1
-            print(f'Одна бактерия удалена. Бактерий в колонии: {
-                  self.current_bacteria_count}')
+    def decipher(self, cipher_text, shift):
+        result = []
+        for letter in cipher_text:
+            ...  # здесь ваш код
+        return ''.join(result)
 
 
-# Пример запуска для самопроверки
-bacteria_producer = BacteriaProducer(max_bacteria=3)
-bacteria_producer.delete()
-bacteria_producer.create()
-bacteria_producer.create()
-bacteria_producer.create()
-bacteria_producer.create()
-bacteria_producer.delete()
+cipher_master = CipherMaster()
+print(cipher_master.cipher(
+    original_text='Однажды ревьюер принял проект с первого раза, с тех пор я его боюсь',
+    shift=2
+))
+print(cipher_master.decipher(
+    cipher_text='Олебэи яфвнэ мроплж сэжи — э пэй рдв злййвкпш лп нвящывнэ',
+    shift=-3
+))
