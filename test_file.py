@@ -20,6 +20,7 @@ class CipherMaster:
                     result.append(chip_letter)
         return ''.join(result)
 
+
 cipher_master = CipherMaster()
 print(cipher_master.process_text(
     text='Однажды ревьюер принял проект с первого раза, с тех пор я его боюсь',
@@ -30,4 +31,4 @@ print(cipher_master.process_text(
     text='Олебэи яфвнэ мроплж сэжи — э пэй рдв злййвкпш лп нвящывнэ',
     shift=-3,
     is_encrypt=False
-)) 
+))
