@@ -1,52 +1,33 @@
 class CipherMaster:
-    # Не изменяйте и не перемещайте эту переменную
     alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 
-    def cipher(self, original_text, shift) -> str:
+    def process_text(self, text, shift, is_encrypt):
         result = []
-        low_original_text = str.lower(original_text)
-        words = low_original_text.split()
-        big_sup_result: str = ''
-        for letter in words:
-            sup_result: str = ''
-            for cimbol_words in letter:
-                if cimbol_words != ',':
-                    chip_simbol = self.alphabet.find(cimbol_words)
-                    new_chip_simbol = int((chip_simbol + shift) % 33)
-                    chip = self.alphabet[new_chip_simbol]
-                    sup_result += chip
+        low_text = str.lower(text)
+        for letter in low_text:
+            if letter not in self.alphabet:
+                result.append(letter)
+            else:
+                if is_encrypt is True:
+                    old_letter = self.alphabet.find(letter)
+                    new_letter = int((old_letter + shift) % 33)
+                    chip_letter = str(self.alphabet[new_letter])
+                    result.append(chip_letter)
                 else:
-                    sup_result += cimbol_words
-            big_sup_result += sup_result + ' '
-        result.append(big_sup_result)
+                    old_letter = self.alphabet.find(letter)
+                    new_letter = int((old_letter - shift) % 33)
+                    chip_letter = str(self.alphabet[new_letter])
+                    result.append(chip_letter)
         return ''.join(result)
-
-    def decipher(self, cipher_text, shift):
-        result = []
-        low_cipher_text = str.lower(cipher_text)
-        words = low_cipher_text.split()
-        big_sup_result: str = ''
-        for letter in words:
-            sup_result: str = ''
-            for cimbol_words in letter:
-                if cimbol_words != ',' and cimbol_words != '—':
-                    chip_simbol = self.alphabet.find(cimbol_words)
-                    new_chip_simbol = int((chip_simbol - shift) % 33)
-                    chip = self.alphabet[new_chip_simbol]
-                    sup_result += chip
-                else:
-                    sup_result += cimbol_words
-            big_sup_result += sup_result + ' '
-        result.append(big_sup_result)
-        return ''.join(result)
-
 
 cipher_master = CipherMaster()
-print(cipher_master.cipher(
-    original_text='Однажды ревьюер принял проект с первого раза, с тех пор я его боюсь',
-    shift=2
+print(cipher_master.process_text(
+    text='Однажды ревьюер принял проект с первого раза, с тех пор я его боюсь',
+    shift=2,
+    is_encrypt=True
 ))
-print(cipher_master.decipher(
-    cipher_text='Олебэи яфвнэ мроплж сэжи — э пэй рдв злййвкпш лп нвящывнэ',
-    shift=-3
-))
+print(cipher_master.process_text(
+    text='Олебэи яфвнэ мроплж сэжи — э пэй рдв злййвкпш лп нвящывнэ',
+    shift=-3,
+    is_encrypt=False
+)) 
